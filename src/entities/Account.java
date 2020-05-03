@@ -11,27 +11,25 @@ import javax.validation.constraints.Size;
 @Table(name="accounts")
 public class Account {
 	
-	@Id
-	@Column(name="id")
-	private int ID;
+	
 	
 	@NotNull(message="is required")
 	@Size(min=1,message="is required")
-	@Column(name="account_name")
+	@Id
+	@Column(name="acc_name")
 	private String accName;
 	
 	@NotNull(message="is required")
 	@Size(min=1,message="is required")
-	@Column(name="account_password")
+	@Column(name="acc_password")
 	private String password;
 	
 	public Account() {
 		
 	}
 
-	public Account(int iD, @NotNull(message = "is required") @Size(min = 1, message = "is required") String accName,
-			@NotNull(message = "is required") @Size(min = 1, message = "is required") String password) {
-		ID = iD;
+	public Account(String accName, String password) {
+		
 		this.accName = accName;
 		this.password = password;
 	}
@@ -53,7 +51,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [ID=" + ID + ", accName=" + accName + ", password=" + password + "]";
+		return "Account accName=" + accName + ", password=" + password + "]";
 	}
 	
 	

@@ -20,7 +20,7 @@ public class TestAccount {
 		
 		try {
 			
-			Account acc = new Account(1,"test","test");
+			Account acc = new Account("test","test");
 			
 			session.beginTransaction();
 			
