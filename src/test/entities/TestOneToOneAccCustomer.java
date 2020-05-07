@@ -22,18 +22,42 @@ public class TestOneToOneAccCustomer {
 		
 		try {
 			
+//			session.beginTransaction();
+//			
+//			Account acc = new Account("test3","test3");
+//			
+//			Customer customer = new Customer();
+//			
+//			customer.setAccount(acc);
+//			
+//			session.save(customer);
+//			
+//			session.getTransaction().commit();
+//			System.out.println("Completed transaction");
+			
+			// new test
+			
+//			session.beginTransaction();
+//			
+//			Account acc = new Account("test5", "test5");
+//			Customer customer = new Customer();
+//			
+//			session.save(customer);
+//			
+//			
+//			session.getTransaction().commit();
+			
+			
 			session.beginTransaction();
+			Account acc = session.get(Account.class, "test7");
 			
-			Account acc = new Account("test3","test3");
 			
-			Customer customer = new Customer();
-			
-			customer.setAccount(acc);
-			
-			session.save(customer);
-			
+			acc.getCustomer().setAccount(null);
+			//customer.getAccount().setCustomer(null);
+			session.delete(acc);
 			session.getTransaction().commit();
-			System.out.println("Completed transaction");
+			
+			
 			
 		} finally {factory.close(); }
 		

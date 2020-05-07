@@ -20,7 +20,7 @@ public class Customer {
 	@Column(name="customer_id")
 	private int customer_id;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="acc_name")
 	private Account account;
 	

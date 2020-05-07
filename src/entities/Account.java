@@ -1,8 +1,10 @@
 package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,6 +26,15 @@ public class Account {
 	@Column(name="acc_password")
 	private String password;
 	
+	// when we delete customerID, we dont have to delete account as well
+	// two scenarios:
+	// for each customerID - one account
+	// for each order - customerID
+	// first option seems more intuitive, but will see
+	@OneToOne(mappedBy="account", cascade = {CascadeType.DETACH,CascadeType.MERGE,
+			CascadeType.PERSIST,CascadeType.REFRESH})
+	private Customer customer;
+	
 	public Account() {
 		
 	}
@@ -33,8 +44,6 @@ public class Account {
 		this.accName = accName;
 		this.password = password;
 	}
-
-
 
 	public String getAccName() {
 		return accName;
@@ -47,6 +56,14 @@ public class Account {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override
