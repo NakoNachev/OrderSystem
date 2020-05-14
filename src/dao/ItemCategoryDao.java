@@ -3,13 +3,29 @@ package dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
+import entities.Account;
+import entities.Customer;
 import entities.ItemCategory;
 import interfaces.GenericDao;
 import interfaces.SessionControlInterface;
 
 public class ItemCategoryDao implements GenericDao<ItemCategory>, SessionControlInterface {
 
+	
+	private static SessionFactory getSessionFactory() {
+		
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Account.class)
+				.addAnnotatedClass(Customer.class)
+				.buildSessionFactory();
+		
+		return factory;
+	}
+	
 	@Override
 	public Session openCurrentSession() {
 		// TODO Auto-generated method stub
@@ -17,7 +33,7 @@ public class ItemCategoryDao implements GenericDao<ItemCategory>, SessionControl
 	}
 
 	@Override
-	public Session openCurrentSessionwithTransaction() {
+	public Session openCurrentSessionWithTransaction() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,7 +63,7 @@ public class ItemCategoryDao implements GenericDao<ItemCategory>, SessionControl
 	}
 
 	@Override
-	public ItemCategory findByID(int id) {
+	public ItemCategory findByID(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

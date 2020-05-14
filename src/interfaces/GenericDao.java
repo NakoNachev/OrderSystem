@@ -16,7 +16,7 @@ public interface GenericDao<T> {
 	
 	public void update(T entity);
 	
-	public T findByID(int id);
+	public T findByID(String id);
 	
 	public void delete(T entity);
 	

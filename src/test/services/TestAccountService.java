@@ -19,7 +19,12 @@ public class TestAccountService {
 		
 		
 		AccountService service = new AccountService();
-		Account acc2 = new Account("nako2","1234");
-		service.persist(acc2);
+//		Account acc2 = new Account("nako2","1234");
+//		service.persist(acc2);
+		
+		
+		Account acc = service.findById("nako");
+		acc.setPassword("23456");
+		service.update(acc);
 }
 }

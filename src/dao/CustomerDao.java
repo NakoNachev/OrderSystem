@@ -3,12 +3,27 @@ package dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
+import entities.Account;
 import entities.Customer;
 import interfaces.GenericDao;
 import interfaces.SessionControlInterface;
 
 public class CustomerDao implements GenericDao<Customer>, SessionControlInterface {
+	
+	
+	private static SessionFactory getSessionFactory() {
+		
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Account.class)
+				.addAnnotatedClass(Customer.class)
+				.buildSessionFactory();
+		
+		return factory;
+	}
 
 	@Override
 	public Session openCurrentSession() {
@@ -17,7 +32,7 @@ public class CustomerDao implements GenericDao<Customer>, SessionControlInterfac
 	}
 
 	@Override
-	public Session openCurrentSessionwithTransaction() {
+	public Session openCurrentSessionWithTransaction() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,7 +62,7 @@ public class CustomerDao implements GenericDao<Customer>, SessionControlInterfac
 	}
 
 	@Override
-	public Customer findByID(int id) {
+	public Customer findByID(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

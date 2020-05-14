@@ -22,16 +22,23 @@ public class Courier {
 	@Column(name="courier_name")
 	private String courierName;
 	
-	
+	@Column(name="address")
 	private Address address;
 	
 	@Column(name="outstanding_orders_number")
 	private int outstandingOrders;
 	
+	@Column(name="contact_email")
+	private String email;
+	
+	@Column(name="contact_number")
+	private String telephoneNumber;
+	
 	private String streetName;
 	private int streetNumber;
 	private int postalCode;
 	private String country;
+	
 	
 
 	public String getCourierName() {

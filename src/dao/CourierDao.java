@@ -2,11 +2,35 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import entities.Account;
 import entities.Courier;
+import entities.Customer;
 import interfaces.GenericDao;
+import interfaces.SessionControlInterface;
 
-public class CourierDao implements GenericDao<Courier> {
+public class CourierDao implements GenericDao<Courier>, SessionControlInterface {
 
+	public CourierDao() {
+		
+	}
+	
+	private static SessionFactory getSessionFactory() {
+		
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Account.class)
+				.addAnnotatedClass(Customer.class)
+				.buildSessionFactory();
+		
+		return factory;
+	}
+	
+	
+	
 	@Override
 	public void persist(Courier entity) {
 		
@@ -19,7 +43,7 @@ public class CourierDao implements GenericDao<Courier> {
 	}
 
 	@Override
-	public Courier findByID(int id) {
+	public Courier findByID(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -34,6 +58,30 @@ public class CourierDao implements GenericDao<Courier> {
 	public List<Courier> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Session openCurrentSession() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Session openCurrentSessionWithTransaction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void closeCurrentSession() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeCurrentSessionWithTransaction() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

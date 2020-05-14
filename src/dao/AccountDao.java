@@ -36,16 +36,11 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 		
 		return factory;
 	}
-	
-	public void openSessionWithTransaction() { 
-		
-		this.currentSession = getSessionFactory().openSession();
-		this.currentTransaction = this.currentSession.beginTransaction();
-	}
+
 	
 	public void beginTransaction() {
 		
-		openSessionWithTransaction();
+		openCurrentSessionWithTransaction();
 		this.currentTransaction.begin();
 	}
 	
@@ -69,11 +64,6 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 		this.currentSession.close();
 	}
 	
-	@Override
-	public Session openCurrentSessionwithTransaction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public void persist(Account entity) {
@@ -88,7 +78,7 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 	}
 
 	@Override
-	public Account findByID(int id) {
+	public Account findByID(String id) {
 		
 		Account acc = getCurrentSession().get(Account.class, id);
 		return acc;
@@ -105,6 +95,16 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 		List<Account> accounts = getCurrentSession().createQuery("from accounts").getResultList();
 		return accounts;
 	}
+
+
+	@Override
+	public Session openCurrentSessionWithTransaction() {
+		this.currentSession = getSessionFactory().openSession();
+		this.currentTransaction = this.currentSession.beginTransaction();
+		return null;
+	}
+
+
 
 	
 
