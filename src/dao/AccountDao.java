@@ -92,7 +92,7 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 
 	@Override
 	public List<Account> findAll() {
-		List<Account> accounts = getCurrentSession().createQuery("from accounts").getResultList();
+		List<Account> accounts = getCurrentSession().createQuery("from Account a").getResultList();
 		return accounts;
 	}
 

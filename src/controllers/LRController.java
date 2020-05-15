@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import entities.Account;
+import services.AccountService;
 
 
 /**
@@ -29,7 +32,9 @@ public class LRController {
 	}
 	
 	@RequestMapping("/loginForm")
-	public String showLoginForm() {
+	public String showLoginForm(Model model) {
+		Account accToLogin = new Account();
+		model.addAttribute("accToLogin", accToLogin);
 		
 		return "login-user";
 	}
@@ -44,8 +49,33 @@ public class LRController {
 			return "register-user";
 		}
 		else {
+			AccountService service = new AccountService();
+			service.persist(acc);
 			return "reg-verify";
 		}
+	}
+	
+	@RequestMapping("/loginUser")
+	public String executeLogin(@ModelAttribute("accToLogin") Account accToLogin) {
+		
+		AccountService service = new AccountService();
+		List<Account> existingAccs = service.findAll();
+		boolean found = false;
+		
+		for(Account acc : existingAccs) {
+			if (acc.getAccName().equals(accToLogin.getAccName()) & acc.getPassword().equals(accToLogin.getPassword())) {
+				found = true;
+			}
+		}
+		
+		if (found) {
+			return "home-page";
+		}
+		else {
+			System.out.println("User was not found!");
+			return "login-user";
+		}
+		
 	}
 
 }

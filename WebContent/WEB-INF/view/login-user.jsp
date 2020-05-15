@@ -9,6 +9,14 @@
 
 
 	</head>
+	
+	<form:form action="loginUser" modelAttribute="accToLogin" >
+	
+	Username <form:input path="accName" /> <br>
+	Password: <form:password path="password" /> <br>
+	<input type="submit" value="Submit">
+	
+	</form:form>
 
 
 	<body>
