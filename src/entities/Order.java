@@ -24,9 +24,9 @@ public class Order {
 	@Column(name="id")
 	private int id;
 	
-	@ManyToMany
-	@JoinColumn(name="item_id")
-	private Item item;
+//	@ManyToMany
+//	@JoinColumn(name="item_id")
+//	private Item item;
 	
 	@ManyToOne
 	@JoinColumn(name="customer_id")
@@ -48,14 +48,14 @@ public class Order {
 	}
 
 
-	public Item getItem() {
-		return item;
-	}
-
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
+//	public Item getItem() {
+//		return item;
+//	}
+//
+//
+//	public void setItem(Item item) {
+//		this.item = item;
+//	}
 
 
 	public Customer getCustomer() {
@@ -100,7 +100,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [item=" + item + ", customer=" + customer + ", courier=" + courier + ", deliveryDate="
+		return "Order [item=" + ", customer=" + customer + ", courier=" + courier + ", deliveryDate="
 				+ deliveryDate + ", orderSetDate=" + orderSetDate + "]";
 	}
 	

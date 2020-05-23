@@ -23,7 +23,9 @@ public class Courier {
 	private String courierName;
 	
 	@Column(name="address")
-	private Address address;
+	private String addressS;
+	
+//	private Address address;
 	
 	@Column(name="outstanding_orders_number")
 	private int outstandingOrders;
@@ -49,17 +51,17 @@ public class Courier {
 		this.courierName = courierName;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-		this.country = this.address.getCountry();
-		this.postalCode = this.address.getPostalCode();
-		this.streetName = this.address.getStreetName();
-		this.streetNumber = this.address.getStreetNumber();
-	}
+//	public Address getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddress(Address address) {
+//		this.address = address;
+//		this.country = this.address.getCountry();
+//		this.postalCode = this.address.getPostalCode();
+//		this.streetName = this.address.getStreetName();
+//		this.streetNumber = this.address.getStreetNumber();
+//	}
 
 	public int getOutstandingOrders() {
 		return outstandingOrders;
@@ -67,6 +69,14 @@ public class Courier {
 
 	public void setOutstandingOrders(int outstandingOrders) {
 		this.outstandingOrders = outstandingOrders;
+	}
+
+	public String getAddressS() {
+		return addressS;
+	}
+
+	public void setAddressS(String addressS) {
+		this.addressS = addressS;
 	}
 	
 

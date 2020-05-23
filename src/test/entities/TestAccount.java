@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+
 import entities.Account;
 import entities.Customer;
 
@@ -16,13 +17,15 @@ public class TestAccount {
 								.addAnnotatedClass(Account.class)
 								//.addAnnotatedClass(Customer.class)
 								.buildSessionFactory();
+
+
 		
 		Session session = factory.getCurrentSession();
 		
 		
 		try {
 			session.beginTransaction();
-			Account acc = new Account("test9","test9");
+			Account acc = new Account("test10","test10");
 			//Customer customer = new Customer();
 			//customer.setAccount(acc);
 			

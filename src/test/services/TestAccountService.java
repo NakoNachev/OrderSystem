@@ -17,14 +17,19 @@ public class TestAccountService {
 //		System.out.println("Done");
 	
 		
-		
-		AccountService service = new AccountService();
-//		Account acc2 = new Account("nako2","1234");
-//		service.persist(acc2);
-		
-		
-		Account acc = service.findById("nako");
-		acc.setPassword("23456");
-		service.update(acc);
+		try {
+			
+			AccountService service = new AccountService();
+			
+			
+			Account acc = service.findById("nako");
+			acc.setPassword("23456");
+			service.update(acc);
+			
+		} catch (Throwable exc) {
+			
+			exc.printStackTrace();
+		}
+
 }
 }

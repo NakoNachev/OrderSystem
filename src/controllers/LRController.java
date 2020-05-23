@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import business.logic.HomePageChoice;
 import entities.Account;
 import services.AccountService;
 
@@ -56,7 +57,7 @@ public class LRController {
 	}
 	
 	@RequestMapping("/loginUser")
-	public String executeLogin(@ModelAttribute("accToLogin") Account accToLogin) {
+	public String executeLogin(@ModelAttribute("accToLogin") Account accToLogin, Model model) {
 		
 		AccountService service = new AccountService();
 		List<Account> existingAccs = service.findAll();
@@ -69,6 +70,8 @@ public class LRController {
 		}
 		
 		if (found) {
+			HomePageChoice choice = new HomePageChoice();
+			model.addAttribute("choice", choice);
 			return "home-page";
 		}
 		else {

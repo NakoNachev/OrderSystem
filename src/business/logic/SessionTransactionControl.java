@@ -1,43 +1,46 @@
-package dao;
-
-import java.util.List;
+package business.logic;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import dao.ItemDao;
 import entities.Account;
 import entities.Courier;
 import entities.Customer;
 import entities.Item;
+import entities.ItemCategory;
 import entities.Order;
-import interfaces.GenericDao;
 import interfaces.SessionControlInterface;
 
-public class OrderDao implements GenericDao<Order>, SessionControlInterface {
 
-	private Session currentSession;
-	private Transaction currentTransaction;
-	
+/**
+ * Should provide the needed implementation of session and transaction control,
+ * to be used by the dao classes.
+ * @author Asus
+ *
+ */
+public class SessionTransactionControl implements SessionControlInterface {
+
+	Session currentSession;
+	Transaction currentTransaction;
 	
 	private static SessionFactory getSessionFactory() {
 		
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Account.class)
-				.addAnnotatedClass(Customer.class)
-				.addAnnotatedClass(Item.class)
-				.addAnnotatedClass(Courier.class)
 				.buildSessionFactory();
 		
 		return factory;
 	}
-
+	
+	
+	
 	@Override
 	public Session openCurrentSession() {
 		this.currentSession = getSessionFactory().openSession();
-		return this.currentSession;
+		return null;
 	}
 
 	@Override
@@ -49,47 +52,18 @@ public class OrderDao implements GenericDao<Order>, SessionControlInterface {
 
 	@Override
 	public void closeCurrentSession() {
-		this.currentSession.close();
-
+		
+		if (this.currentSession != null) {
+			this.currentSession.close();
+		}
+		
 	}
 
 	@Override
 	public void closeCurrentSessionWithTransaction() {
-		
 		this.currentTransaction.commit();
 		this.currentSession.close();
-	}
-
-	@Override
-	public void persist(Order entity) {
-		this.currentSession.save(entity);
-	
-	}
-
-	@Override
-	public void update(Order entity) {
-		this.currentSession.saveOrUpdate(entity);
 		
-	}
-
-	@Override
-	public void delete(Order entity) {
-		this.currentSession.delete(entity);
-		
-	}
-
-	@Override
-	public List<Order> findAll() {
-		
-		List<Order> orders = getCurrentSession().createQuery("from orders").getResultList();
-		return orders;
-
-	}
-
-	@Override
-	public Order findByID(String id) {
-		Order order = getCurrentSession().get(Order.class, id);
-		return null;
 	}
 
 	public Session getCurrentSession() {

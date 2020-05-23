@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import entities.Account;
 import entities.Customer;
@@ -16,6 +17,7 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 	
 	private Session currentSession;
 	private Transaction currentTransaction;
+	private SessionFactory sessionFactory;
 	
 	public AccountDao() {
 		
@@ -26,7 +28,7 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 		return this.currentSession;
 	}
 	
-	private static SessionFactory getSessionFactory() {
+	private  SessionFactory getSessionFactory() {
 		
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
@@ -35,6 +37,7 @@ public class AccountDao implements GenericDao<Account>,SessionControlInterface {
 				.buildSessionFactory();
 		
 		return factory;
+		//return this.sessionFactory;
 	}
 
 	
