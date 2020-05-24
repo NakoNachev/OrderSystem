@@ -2,86 +2,45 @@ package dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import entities.Account;
+import business.logic.SessionTransactionControl;
 import entities.Courier;
 import entities.Customer;
 import interfaces.GenericDao;
-import interfaces.SessionControlInterface;
 
-public class CourierDao implements GenericDao<Courier>, SessionControlInterface {
+public class CourierDao extends SessionTransactionControl implements GenericDao<Courier>{
 
 	public CourierDao() {
 		
 	}
 	
-	private static SessionFactory getSessionFactory() {
-		
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Account.class)
-				.addAnnotatedClass(Customer.class)
-				.buildSessionFactory();
-		
-		return factory;
-	}
-	
-	
-	
 	@Override
 	public void persist(Courier entity) {
-		
+		super.getCurrentSession().save(entity);
 	}
 
 	@Override
 	public void update(Courier entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().update(entity);
 		
 	}
 
 	@Override
 	public Courier findByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Courier courier = super.getCurrentSession().get(Courier.class, id);
+		return courier;
 	}
 
 	@Override
 	public void delete(Courier entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().delete(entity);
 		
 	}
 
 	@Override
 	public List<Courier> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Courier> couriers = super.getCurrentSession().createQuery("from couriers").getResultList();
+		return couriers;
 	}
 
-	@Override
-	public Session openCurrentSession() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Session openCurrentSessionWithTransaction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void closeCurrentSession() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void closeCurrentSessionWithTransaction() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

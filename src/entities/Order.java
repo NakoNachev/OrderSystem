@@ -103,6 +103,18 @@ public class Order {
 		return "Order [item=" + ", customer=" + customer + ", courier=" + courier + ", deliveryDate="
 				+ deliveryDate + ", orderSetDate=" + orderSetDate + "]";
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 	
 	

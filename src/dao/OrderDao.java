@@ -81,7 +81,7 @@ public class OrderDao implements GenericDao<Order>, SessionControlInterface {
 	@Override
 	public List<Order> findAll() {
 		
-		List<Order> orders = getCurrentSession().createQuery("from orders").getResultList();
+		List<Order> orders = getCurrentSession().createQuery("from Order o").getResultList();
 		return orders;
 
 	}
@@ -89,7 +89,7 @@ public class OrderDao implements GenericDao<Order>, SessionControlInterface {
 	@Override
 	public Order findByID(String id) {
 		Order order = getCurrentSession().get(Order.class, id);
-		return null;
+		return order;
 	}
 
 	public Session getCurrentSession() {

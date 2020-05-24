@@ -6,78 +6,48 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import business.logic.SessionTransactionControl;
 import entities.Account;
 import entities.Customer;
 import entities.ItemCategory;
 import interfaces.GenericDao;
 import interfaces.SessionControlInterface;
 
-public class ItemCategoryDao implements GenericDao<ItemCategory>, SessionControlInterface {
+public class ItemCategoryDao extends SessionTransactionControl implements GenericDao<ItemCategory> {
 
-	
-	private static SessionFactory getSessionFactory() {
+	public ItemCategoryDao() {
 		
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Account.class)
-				.addAnnotatedClass(Customer.class)
-				.buildSessionFactory();
-		
-		return factory;
 	}
 	
-	@Override
-	public Session openCurrentSession() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Session openCurrentSessionWithTransaction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void closeCurrentSession() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void closeCurrentSessionWithTransaction() {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public void persist(ItemCategory entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().save(entity);
 		
 	}
 
 	@Override
 	public void update(ItemCategory entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().update(entity);
 		
 	}
 
 	@Override
 	public ItemCategory findByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		ItemCategory category = super.getCurrentSession().get(ItemCategory.class, id);
+		
+		return category;
 	}
 
 	@Override
 	public void delete(ItemCategory entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().delete(entity);
 		
 	}
 
 	@Override
 	public List<ItemCategory> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ItemCategory> categories = super.getCurrentSession().createQuery("from item_categories").getResultList();
+		return categories;
 	}
 
 }

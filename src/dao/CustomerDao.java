@@ -6,77 +6,47 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import business.logic.SessionTransactionControl;
 import entities.Account;
 import entities.Customer;
+import entities.ItemCategory;
 import interfaces.GenericDao;
 import interfaces.SessionControlInterface;
 
-public class CustomerDao implements GenericDao<Customer>, SessionControlInterface {
-	
-	
-	private static SessionFactory getSessionFactory() {
+public class CustomerDao extends SessionTransactionControl implements GenericDao<Customer>{
+
+	public CustomerDao() {
 		
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Account.class)
-				.addAnnotatedClass(Customer.class)
-				.buildSessionFactory();
-		
-		return factory;
 	}
-
-	@Override
-	public Session openCurrentSession() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Session openCurrentSessionWithTransaction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void closeCurrentSession() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void closeCurrentSessionWithTransaction() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	public void persist(Customer entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().save(entity);
 		
 	}
 
 	@Override
 	public void update(Customer entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().update(entity);
 		
 	}
 
 	@Override
 	public Customer findByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer customer = super.getCurrentSession().get(Customer.class, id);
+		return customer;
 	}
 
 	@Override
 	public void delete(Customer entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().delete(entity);
 		
 	}
 
 	@Override
 	public List<Customer> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Customer> customers = super.getCurrentSession().createQuery("from customers").getResultList();
+		return customers;
 	}
 
 }

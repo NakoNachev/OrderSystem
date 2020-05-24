@@ -2,10 +2,7 @@ package dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+
 
 import business.logic.SessionTransactionControl;
 import entities.Item;
@@ -15,8 +12,9 @@ import interfaces.SessionControlInterface;
 
 public class ItemDao extends SessionTransactionControl implements GenericDao<Item>{
 
-
-	
+	public ItemDao() {
+		
+	}
 	
 	@Override
 	public void persist(Item entity) {
@@ -26,26 +24,26 @@ public class ItemDao extends SessionTransactionControl implements GenericDao<Ite
 
 	@Override
 	public void update(Item entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().saveOrUpdate(entity);
 		
 	}
 
 	@Override
 	public Item findByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Item item = super.getCurrentSession().get(Item.class, id);
+		return item;
 	}
 
 	@Override
 	public void delete(Item entity) {
-		// TODO Auto-generated method stub
+		super.getCurrentSession().delete(entity);
 		
 	}
 
 	@Override
 	public List<Item> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> items = super.getCurrentSession().createQuery("from items").getResultList();	
+		return items;
 	}
 
 }
