@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import business.logic.HomePageChoice;
+import entities.Item;
 import entities.Order;
+import services.ItemService;
 import services.OrderService;
 
 /**
@@ -20,6 +22,7 @@ import services.OrderService;
 public class InnerContentController {
 	
 	private OrderService oService;
+	private ItemService iService;
 	
 	@RequestMapping("/submitAction")
 	public String handleHomeChoice(@ModelAttribute("choice") HomePageChoice choice, Model model) {
@@ -37,6 +40,12 @@ public class InnerContentController {
 		
 		case "Account info":
 			return "accountInfoForm";
+			
+		case "Items list":
+			iService = new ItemService();
+			List<Item> items = iService.findAll();
+			model.addAttribute("items",items);
+			return "viewItemInfo";
 		
 		default:
 			

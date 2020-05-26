@@ -48,8 +48,11 @@ public class ItemService implements GenericDao<Item> {
 
 	@Override
 	public List<Item> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> items;
+		itemDao.openCurrentSessionWithTransaction();
+		items = itemDao.findAll();
+		itemDao.closeCurrentSessionWithTransaction();
+		return items;
 	}
 
 }

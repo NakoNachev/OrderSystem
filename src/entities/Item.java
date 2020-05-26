@@ -64,6 +64,14 @@ public class Item {
 	public void setItemCategory(ItemCategory itemCategory) {
 		this.itemCategory = itemCategory;
 	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
 	
 	
 	

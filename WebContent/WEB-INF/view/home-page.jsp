@@ -31,6 +31,8 @@
 		<form:option value="See orders" label="See orders"/>
 		<form:option value="Place order" label="Place order" />
 		<form:option value="Account info" label= "Account info"/>
+		<form:option value="Items list" label= "Items list"/>
+		
 
 		</form:select>
 

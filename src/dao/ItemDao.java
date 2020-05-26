@@ -42,7 +42,7 @@ public class ItemDao extends SessionTransactionControl implements GenericDao<Ite
 
 	@Override
 	public List<Item> findAll() {
-		List<Item> items = super.getCurrentSession().createQuery("from items").getResultList();	
+		List<Item> items = super.getCurrentSession().createQuery("from Item i").getResultList();	
 		return items;
 	}
 
