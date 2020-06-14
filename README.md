@@ -27,4 +27,8 @@ What the Project includes:
 * Order cancellation
 ..
 
+Update June 2020:
+
+Currently not being worked on, will be improved in the future.
+
 
